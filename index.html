@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CyberShield Toolkit</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>⚡ CyberShield Toolkit ⚡</h1>
+
+        <form method="POST">
+
+            <input type="text" name="target" placeholder="Enter Target IP or Domain" required>
+
+            <input type="number" name="start_port" placeholder="Start Port" required>
+
+            <input type="number" name="end_port" placeholder="End Port" required>
+
+            <button type="submit">Start Scan</button>
+
+        </form>
+
+        {% if results %}
+
+        <div class="result-box">
+
+            <h2>Open Ports</h2>
+
+            {% for port in results %}
+                <p>✅ Port {{ port }} is OPEN</p>
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% if dns_result %}
+
+        <div class="result-box">
+            <h2>DNS Lookup</h2>
+            <p>{{ dns_result }}</p>
+        </div>
+
+        {% endif %}
+
+        {% if whois_result %}
+
+        <div class="result-box">
+            <h2>WHOIS Information</h2>
+
+            <pre>{{ whois_result }}</pre>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
